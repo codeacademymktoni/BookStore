@@ -41,6 +41,11 @@ namespace BookStore.Repositories
             return context.Books.FirstOrDefault(x => x.Id == id);
         }
 
+        public List<Book> GetByIds(List<int> bookIds)
+        {
+            return context.Books.Where(x => bookIds.Contains(x.Id)).ToList();
+        }
+
         public void Update(Book updatedBook)
         {
             context.Books.Update(updatedBook);

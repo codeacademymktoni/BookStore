@@ -1,4 +1,5 @@
 ﻿using BookStore.ModelDtos;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Data
@@ -18,5 +19,6 @@ namespace BookStore.Data
         public int Quantity{ get; set; }
         [Required]
         public decimal Price { get; set; }
+        public List<BookOrders> BookOrders{ get; set; }
     }
 }

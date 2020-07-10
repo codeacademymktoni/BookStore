@@ -11,5 +11,6 @@ namespace BookStore.Repositories.Interfaces
         void Create(Book dbBook);
         void Delete(Book bdBook);
         void Update(Book updatedBook);
+        List<Book> GetByIds(List<int> bookIds);
     }
 }

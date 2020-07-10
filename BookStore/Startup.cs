@@ -35,9 +35,18 @@ namespace BookStore
                 options.UseSqlServer(Configuration.GetConnectionString("BookStoreDb"));
             });
 
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IBooksRepository, BooksRepository>();
             services.AddTransient<IBooksService, BooksService>();
+            services.AddTransient<IOrdersService, OrdersService>();
+            services.AddTransient<IOrdersRepository, OrdersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +62,7 @@ namespace BookStore
                 app.UseHsts();
             }
 
+            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
             app.UseMvc();
         }

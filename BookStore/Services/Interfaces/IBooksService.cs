@@ -11,5 +11,6 @@ namespace BookStore.Services.Interfaces
         void Create(BookDto bookDto);
         void Delete(int id);
         void Update(BookDto bookDto);
+        List<BookDto> GetByIds(List<int> bookIds);
     }
 }
