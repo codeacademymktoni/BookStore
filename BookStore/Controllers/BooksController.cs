@@ -1,6 +1,8 @@
 ﻿using BookStore.ModelDtos;
 using BookStore.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace BookStore.Controllers
 {
@@ -15,29 +17,49 @@ namespace BookStore.Controllers
             this.booksService = booksService;
         }
 
+
+        /// <summary>
+        /// Returns all books
+        /// </summary>
         [HttpGet]
-        public IActionResult Get()
+        [Produces("application/json")]
+        public ActionResult<List<BookDto>> Get()
         {
             var books = booksService.GetAll();
             return Ok(books);
         }
 
+
+        /// <summary>
+        /// Returns book for given Id
+        /// </summary>
+        /// <response code="200">Returns list of BookDto items</response>
         [HttpGet]
         [Route("{id}")]
-        public IActionResult Get(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [Produces("application/json")]
+        public ActionResult<BookDto> Get(int id)
         {
             var books = booksService.GetById(id);
             return Ok(books);
         }
 
+
+        /// <summary>
+        /// Returns lsit of books for given author
+        /// </summary>
         [HttpGet]
         [Route("getByAuthor")]
-        public IActionResult Get(string author)
+        public ActionResult<List<BookDto>> Get(string author)
         {
             var books = booksService.GetByAuthor(author);
             return Ok(books);
         }
 
+
+        /// <summary>
+        /// Creates new book
+        /// </summary>
         [HttpPost]
         public IActionResult Create(BookDto bookDto)
         {
@@ -45,6 +67,10 @@ namespace BookStore.Controllers
             return Ok();
         }
 
+
+        /// <summary>
+        /// Deletes book for given Id
+        /// </summary>
         [HttpDelete]
         [Route("{id}")]
         public IActionResult Delete(int id)
@@ -53,6 +79,9 @@ namespace BookStore.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Updates book
+        /// </summary>
         [HttpPut]
         public IActionResult Update(BookDto bookDto)
         {
