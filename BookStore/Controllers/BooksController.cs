@@ -1,5 +1,6 @@
 ﻿using BookStore.ModelDtos;
 using BookStore.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -61,6 +62,7 @@ namespace BookStore.Controllers
         /// Creates new book
         /// </summary>
         [HttpPost]
+        [Authorize]
         public IActionResult Create(BookDto bookDto)
         {
             booksService.Create(bookDto);
@@ -73,6 +75,7 @@ namespace BookStore.Controllers
         /// </summary>
         [HttpDelete]
         [Route("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             booksService.Delete(id);
@@ -83,6 +86,7 @@ namespace BookStore.Controllers
         /// Updates book
         /// </summary>
         [HttpPut]
+        [Authorize]
         public IActionResult Update(BookDto bookDto)
         {
             booksService.Update(bookDto);
