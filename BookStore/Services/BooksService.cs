@@ -18,10 +18,10 @@ namespace BookStore.Services
             this.booksRepository = booksRepository;
         }
 
-        public void Create(BookDto bookDto)
+        public async Task CreateAsync(BookDto bookDto)
         {
             var dbBook = bookDto.ToBookEntity();
-            booksRepository.Create(dbBook);
+            await booksRepository.CreateAsync(dbBook);
         }
 
         public void Delete(int id)

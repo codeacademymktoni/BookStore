@@ -2,6 +2,7 @@
 using BookStore.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BookStore.Repositories
 {
@@ -14,10 +15,10 @@ namespace BookStore.Repositories
             this.context = context;
         }
 
-        public void Create(Book dbBook)
+        public async Task CreateAsync(Book dbBook)
         {
             context.Books.Add(dbBook);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public void Delete(Book dbBook)

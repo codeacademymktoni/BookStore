@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -32,7 +33,6 @@ namespace BookStore.Customizations.Auth
             {
                 return AuthenticateResult.NoResult();
             }
-
             if (!AuthenticationHeaderValue.TryParse(Request.Headers["Authorization"], out AuthenticationHeaderValue headerValue))
             {
                 return AuthenticateResult.NoResult();
@@ -45,9 +45,9 @@ namespace BookStore.Customizations.Auth
 
             var apiKey = headerValue.Parameter;
 
-            var application = applicationRepository.GetByApiKey(apiKey);
+            var application =  applicationRepository.GetByApiKey(apiKey);
 
-            if(application != null)
+            if (application != null)
             {
                 var claims = new List<Claim>
                 {

@@ -1,5 +1,6 @@
 ﻿using BookStore.Data;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BookStore.Repositories.Interfaces
 {
@@ -8,7 +9,7 @@ namespace BookStore.Repositories.Interfaces
         List<Book> GetAll();
         Book GetById(int id);
         List<Book> GetByAuthor(string author);
-        void Create(Book dbBook);
+        Task CreateAsync(Book dbBook);
         void Delete(Book bdBook);
         void Update(Book updatedBook);
         List<Book> GetByIds(List<int> bookIds);

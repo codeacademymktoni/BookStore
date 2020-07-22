@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
@@ -63,9 +64,9 @@ namespace BookStore.Controllers
         /// </summary>
         [HttpPost]
         [Authorize]
-        public IActionResult Create(BookDto bookDto)
+        public async Task<IActionResult> Create(BookDto bookDto)
         {
-            booksService.Create(bookDto);
+            await booksService.CreateAsync(bookDto);
             return Ok();
         }
 
